@@ -21,10 +21,10 @@ public class Fish {
     @NotBlank
     private String name;
 
-    @Size(min = 10)
+    @Size(min = 10, message = "{fish.description.size}")
     private String description;
     
-    @Size(min = 10)
+    @Size(min = 10, message = "{fish.size}")
     private String size;
 
     @Positive

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <title>MagicFishing</title>
+</head>
+
+<body class="cyan lighten-4">
+    <nav class="navbar teal lighten-2">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">MagicFishing</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active"><a href="/fish" th:text="#{fish.pending}"></a></li>
+                <li><a href="#" th:text="#{fish.done}"></a></li>
+                <li><a href="#" th:text="#{user.profile}"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h3 th:text="#{fish.unfish}"></h3>
+
+        <div class="card-panel">
+            <form th:action="${'/fish'}" method="post" th:object="${fish}">
+                <div class="input-field col s12">
+                    <input type="text" th:field="*{name}" class="validate">
+                    <label for="name" th:text="#{fish.name}"></label>
+                    <span class="helper-text red-text" th:errors="*{name}"></span>
+                </div>
+
+                <div class="input-field col s12">
+                    <input th:field="*{description}" type="text" class="validate">
+                    <label for="description" th:text="#{fish.description}"></label>
+                    <span class="helper-text red-text" th:errors="*{description}"></span>
+                </div>
+
+                <div class="input-field col s12">
+                    <input th:field="*{size}" type="text" class="validate">
+                    <label for="size" th:text="#{fish.size}"></label>
+                    <span class="helper-text red-text" th:errors="*{size}"></span>
+                </div>
+
+                <label for="score" th:text="#{fish.score}"></label>
+                <p class="range-field">
+                    <input type="range" th:field="*{score}" min="1" max="100" />
+                    <span class="helper-text red-text" th:errors="*{score}"></span>
+                </p>
+
+                <div class="card-actions right-align">
+                    <a href="/task" th:text="#{fish.cancel}"></a>
+                    <button class="btn" th:text="#{fish.save}"></button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
+
+</html>

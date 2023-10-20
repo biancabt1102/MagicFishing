@@ -6,17 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>MagicFishing</title>
 </head>
 
 <body class="cyan lighten-4">
-    <nav class="navbar teal lighten-2">
+    <nav class="navbar">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">MagicFishing</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="/fish">Pendentes</a></li>
-                <li><a href="#">Pescados</a></li>
-                <li><a href="#">Perfil</a></li>
+                <li class="active"><a href="/fish" th:text="#{fish.pending}"></a></li>
+                <li><a href="#" th:text="#{fish.done}"></a></li>
+                <li><a href="#" th:text="#{user.profile}"></a></li>
+                <li>
+                    <a class='dropdown-trigger' href='#' data-target='dropdown1'>
+                        <img class="avatar" th:src="${avatar_url}" alt="">
+                    </a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><span th:text="${username}"></span></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li>
+                            <a href="/logout">
+                                <i class="material-icons">exit_to_app</i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -43,6 +59,24 @@
             </div>
         </div>
     </main>
+
+    <div class="fixed-action-btn">
+        <a href="/fish/new" class="btn-floating btn-large teal lighten-2">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            const options = {
+                constrainWidth: false,
+                coverTrigger: false
+            }
+            var instances = M.Dropdown.init(elems, options);
+        });
+    </script>
+
 </body>
 
 </html>

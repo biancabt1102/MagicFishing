@@ -18,4 +18,8 @@ public class FishService {
     public void delete(Long id){
         repository.deleteById(id);
     }
+
+    public void create(Fish fish){
+        repository.save(fish);
+    }
 }
