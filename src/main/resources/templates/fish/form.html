@@ -1,27 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <title>MagicFishing</title>
-</head>
+<head th:replace="~{_template :: head('Cadastrar')}"></head>
 
 <body class="cyan lighten-4">
-    <nav class="navbar teal lighten-2">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">MagicFishing</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="/fish" th:text="#{fish.pending}"></a></li>
-                <li><a href="#" th:text="#{fish.done}"></a></li>
-                <li><a href="#" th:text="#{user.profile}"></a></li>
-            </ul>
-        </div>
-    </nav>
+    <nav th:replace="~{_template :: #navbar}"></nav>
 
     <main class="container">
         <h3 th:text="#{fish.unfish}"></h3>
@@ -53,7 +36,7 @@
                 </p>
 
                 <div class="card-actions right-align">
-                    <a href="/task" th:text="#{fish.cancel}"></a>
+                    <a href="/fish" th:text="#{fish.cancel}"></a>
                     <button class="btn" th:text="#{fish.save}"></button>
                 </div>
             </form>

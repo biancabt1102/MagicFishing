@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{_template :: head('Erro')}"></head>
+
+<body>
+    <main class="container center">
+        <h4>Ops, um erro aconteceu</h4>
+        <p th:text="${message}"></p>
+        <a href="/fish" class="btn">Voltar para Home</a>
+    </main>
+</body>
+
+</html>

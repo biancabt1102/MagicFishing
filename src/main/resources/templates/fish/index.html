@@ -1,41 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>MagicFishing</title>
-</head>
+<head th:replace="~{_template :: head('Peixes')}"></head>
 
 <body class="cyan lighten-4">
-    <nav class="navbar">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">MagicFishing</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="/fish" th:text="#{fish.pending}"></a></li>
-                <li><a href="#" th:text="#{fish.done}"></a></li>
-                <li><a href="#" th:text="#{user.profile}"></a></li>
-                <li>
-                    <a class='dropdown-trigger' href='#' data-target='dropdown1'>
-                        <img class="avatar" th:src="${avatar_url}" alt="">
-                    </a>
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li><span th:text="${username}"></span></li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li>
-                            <a href="/logout">
-                                <i class="material-icons">exit_to_app</i>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+
+    <nav th:replace="~{_template :: #navbar}"></nav>
 
     <main class="container">
         <div class="card-panel green" th:if="${success}" th:text="${success}"></div>
@@ -45,14 +15,21 @@
             <div class="col s12 m6" th:each="fish: ${fishs}">
                 <div class="card">
                     <div class="card-content">
+                        <img th:if="${fish.user != null}" th:src="${fish.user.avatarUrl}" class="avatar" alt="">
                         <span class="card-title" th:text="${fish.name}"></span>
-                        <p th:text="${fish.description}"></p>
+                        <p th:text="${fish.description}" th:style="${'text-align: justify'}"></p>
                         <span data-badge-caption="pontos" class="badge blue white-text" th:text="${fish.score}"></span>
                         <p class="purple-text" th:text="${fish.size}"></p>
                     </div>
                     <div class="card-action">
                         <a th:href="${'/fish/delete/' + fish.id}" class="btn red">
                             <i class="material-icons">delete</i>
+                        </a>
+                        <a th:if="${fish.user == null}" th:href="${'/fish/catch/' + fish.id}" class="btn purple">
+                            <i class="material-icons">pan_tool</i>
+                        </a>
+                        <a th:if="${fish.user != null}" th:href="${'/fish/drop/' + fish.id}" class="btn amber black-text">
+                            <i class="material-icons">do_not_touch</i>
                         </a>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.fiap.magicfishing.user.User;
 import jakarta.validation.Valid;
 
 @Controller
@@ -42,7 +43,9 @@ public class FishController {
     }
 
     @GetMapping("new")
-    public String form(Fish fish){
+    public String form(Fish fish, Model model, @AuthenticationPrincipal OAuth2User user){
+        model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
+        model.addAttribute("username", user.getAttribute("name"));
         return "fish/form";
     }
 
@@ -51,6 +54,18 @@ public class FishController {
         if (result.hasErrors()) return "fish/form";
         service.create(fish);
         redirect.addFlashAttribute("success", message.getMessage("fish.create.success", null, LocaleContextHolder.getLocale()));
+        return "redirect:/fish";
+    }
+
+    @GetMapping("/catch/{id}")
+    public String catchFish(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.catchFish(id, User.convert(user));
+        return "redirect:/fish";
+    }
+
+    @GetMapping("/drop/{id}")
+    public String dropFish(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.dropFish(id, User.convert(user));
         return "redirect:/fish";
     }
 }

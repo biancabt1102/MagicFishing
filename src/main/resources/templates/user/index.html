@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{_template :: head('Usuários')}"></head>
+
+<body class="cyan lighten-4">
+    <nav th:replace="~{_template :: #navbar}"></nav>
+
+    <main class="container">
+        <div class="card-panel green" th:if="${success}" th:text="${success}"></div>
+        <h2 th:style="${'text-align: center'}">Usuários</h2>
+
+        <ul class="collection">
+            <li class="collection-item white" th:each="user: ${users}">
+                <img th:src="${user.avatarUrl}" alt="" class="avatar">
+                <span th:text="${user.name}" class="name"></span>
+                <span th:text="${user.score}" class="secondary-content"></span>
+            </li>
+        </ul>
+    </main>
+</body>
+
+</html>
